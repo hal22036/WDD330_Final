@@ -1,0 +1,10 @@
+@import "https://fonts.googleapis.com/css2?family=EB+Garamond&family=Libre+Baskerville&display=swap";
+:root {
+  --font-headline: "Libre Baskerville", serif;
+  --font-body: "EB Garamond", serif;
+  --primary-color: #142d33;
+  --secondary-color: #2d3a73;
+  --tertiary-color: #3b8bdb;
+  --mint-color: #92e8db;
+  --light-lavender: #dbdae3;
+}
