@@ -24,4 +24,4 @@ This API will provide a SPA that one can go to to obtain exercises to target cer
 
 ## netlify deploy address 
 
-https://magical-faloodeh-7a515f.netlify.app/
+https://magical-faloodeh-7a515f.netlify.app
