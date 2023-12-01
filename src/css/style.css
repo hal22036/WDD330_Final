@@ -32,12 +32,17 @@ header {
   margin: 0;
 }
 
-/* main */
+/* main dropdown options */
+/* #selections {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+} */
+
 main div {
   margin-top: 20px;
 }
 
-/* main dropdown options */
 label {
   margin-left: 20px;
   font-size: 25px;
@@ -52,9 +57,22 @@ select {
   border-color: var(--mint-color);
   border-radius: 10px;
   font-size: 20px;
-  width: 300px;
+  width: 220px;
   height: 25px;
-  margin-bottom: 10px;
+  margin: 10px 0 10px 10px;
+}
+
+/* Media query for screens larger than or equal to 700px */
+@media screen and (min-width: 700px) {
+  .select {
+    display: inline-block;
+    margin-left: 20px;
+    width: 46%; /* Adjust the width as needed */
+  }
+
+  select {
+    margin-left: 20px;
+  }
 }
 
 /* exercise card */
@@ -63,10 +81,12 @@ select {
   flex-direction: column;
   align-items: center;
   text-align: center;
+  margin: 0 auto;
 }
 .card-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .card {
@@ -80,11 +100,18 @@ select {
   font-weight: bold;
 }
 
+.card:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
 .card-container h2 {
   display: block;
   color: var(--light-lavender);
   font-size: 5vw;
   margin-bottom: 10px;
+  text-shadow: 2px 2px 4px var(--mint-color);
 }
 
 .card img {
@@ -95,6 +122,7 @@ select {
 .different {
   color: var(--light-lavender);
   font-size: 5vw;
+  text-shadow: 2px 2px 4px var(--mint-color);
 }
 
 /* footer */
