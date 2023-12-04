@@ -24,9 +24,109 @@ export function populateExerciseCards(containerElement, exercises) {
     nameElement.textContent = exercise.name;
     card.appendChild(nameElement);
 
+    // Add event listener to the card
+    card.addEventListener("click", () => {
+      // Populate the chosenCard section
+      populateChosenCard(exercise);
+    });
+
     cardContainer.appendChild(card);
   });
 }
+
+// Function to populate the chosenCard section
+function populateChosenCard(exercise) {
+  const chosenCardSection = document.getElementById("chosenCard");
+  chosenCardSection.innerHTML = ""; // Clear previous content
+
+  // Create a container for the chosen card content
+  const cardContentContainer = document.createElement("div");
+  cardContentContainer.className = "chosen-card-content";
+  chosenCardSection.appendChild(cardContentContainer);
+
+  // Create an image element for the gifUrl
+  const imgElement = document.createElement("img");
+  imgElement.src = exercise.gifUrl;
+  imgElement.alt = exercise.name; // Use exercise name as alt text
+  cardContentContainer.appendChild(imgElement);
+
+  // Create a container for exercise details (name, instructions, and button)
+  const exerciseDetailsContainer = document.createElement("div");
+  exerciseDetailsContainer.className = "exercise-details-content";
+  cardContentContainer.appendChild(exerciseDetailsContainer);
+
+  // Create a heading for the exercise name
+  const nameElement = document.createElement("h3");
+  nameElement.textContent = exercise.name;
+  exerciseDetailsContainer.appendChild(nameElement);
+
+  // Create an ordered list for instructions
+  const instructionsList = document.createElement("ol");
+  exercise.instructions.forEach((instruction) => {
+    const instructionItem = document.createElement("li");
+    instructionItem.textContent = instruction;
+    instructionsList.appendChild(instructionItem);
+  });
+  exerciseDetailsContainer.appendChild(instructionsList);
+
+  // Add Completed button
+  const completedButton = document.createElement("button");
+  completedButton.textContent = "Exercise Complete";
+  completedButton.className = "completed-button"; // Add a class for styling
+  completedButton.addEventListener("click", () => {
+    // Handle completion and update table
+    handleExerciseCompletion(exercise);
+  });
+  exerciseDetailsContainer.appendChild(completedButton);
+}
+
+
+
+function handleExerciseCompletion(exercise) {
+  // Get the completed exercises from localStorage
+  const completedExercises = JSON.parse(localStorage.getItem("completedExercises")) || [];
+
+  // Add the completed exercise
+  completedExercises.push({
+    name: exercise.name,
+    equipment: exercise.equipment || "N/A", // Assuming equipment is an array; change as needed
+    date: new Date().toLocaleDateString(),
+  });
+
+  // Save the updated completed exercises to localStorage
+  localStorage.setItem("completedExercises", JSON.stringify(completedExercises));
+
+  // Update the completed exercises table
+  updateCompletedExercisesTable(completedExercises);
+}
+
+export function updateCompletedExercisesTable(completedExercises) {
+  const table = document.getElementById("completedExercisesTable");
+  const tableContainer = document.querySelector(".completed-exercises-container");
+
+  // Check if there are completed exercises
+  if (completedExercises.length === 0) {
+    table.style.display = "none"; // Hide the table if no completed exercises
+    tableContainer.style.display = "none"; // Hide the container if no completed exercises
+    return;
+  } else {
+    table.style.display = "table"; // Show the table if there are completed exercises
+    tableContainer.style.display = "block"; // Show the container if there are completed exercises
+  }
+
+  const tableBody = table.querySelector("tbody");
+  tableBody.innerHTML = ""; // Clear previous content
+
+  completedExercises.forEach((exercise) => {
+    const row = tableBody.insertRow();
+    row.insertCell(0).textContent = exercise.name;
+    row.insertCell(1).textContent = exercise.equipment;
+    row.insertCell(2).textContent = exercise.date;
+  });
+}
+
+
+
 
 // Add a class to the containerElement for styling
 const containerElement = document.getElementById("container"); // Replace with the actual ID of your container

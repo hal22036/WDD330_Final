@@ -1,5 +1,9 @@
 import { api } from "./api.mjs";
-import { populateExerciseCards, populateDropdown } from "./forms.mjs";
+import {
+  populateExerciseCards,
+  populateDropdown,
+  updateCompletedExercisesTable,
+} from "./forms.mjs";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const equipmentSelect = document.getElementById("equipmentSelect");
@@ -78,4 +82,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Populate body part options on page load
   populateDropdown(bodyPartSelect, await api.fetchBodyPartOptions(apiKey));
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Load completed exercises from localStorage on page load
+  const completedExercises =
+    JSON.parse(localStorage.getItem("completedExercises")) || [];
+
+  // Update the completed exercises table
+  updateCompletedExercisesTable(completedExercises);
 });
