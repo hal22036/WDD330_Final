@@ -90,6 +90,7 @@ function handleExerciseCompletion(exercise) {
   completedExercises.push({
     name: exercise.name,
     equipment: exercise.equipment || "N/A", 
+    date: new Date().toLocaleDateString(),
   });
 
   // Save the updated completed exercises to localStorage
@@ -124,6 +125,7 @@ export function updateCompletedExercisesTable(completedExercises) {
   });
 }
 
+// Add a class to the containerElement for styling
 const containerElement = document.getElementById("container"); 
 containerElement.classList.add("container");
 
@@ -131,6 +133,7 @@ containerElement.classList.add("container");
 export function populateDropdown(selectElement, options) {
   selectElement.innerHTML = "";
 
+  // Ensure options is an array
   const optionsArray = Array.isArray(options) ? options : [options];
 
   const defaultOption = document.createElement("option");
