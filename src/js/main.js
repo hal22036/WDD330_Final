@@ -27,9 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         Infinity,
         apiKey,
       );
-      console.log("Unique Equipment Types in main.js:", uniqueEquipmentTypes);
 
-      // Pass the options directly, not as a function
       populateDropdown(equipmentSelect, uniqueEquipmentTypes);
     } catch (error) {
       console.error("Error:", error);
@@ -41,9 +39,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const selectedBodyPart = bodyPartSelect.value;
     const selectedEquipment = equipmentSelect.value;
 
-    console.log("Selected Body Part:", selectedBodyPart);
-    console.log("Selected Equipment:", selectedEquipment);
-
     // Fetch exercises based on selected body part and equipment
     const { exercises } = await api.fetchExercises(
       selectedBodyPart,
@@ -51,17 +46,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       apiKey,
     );
 
-    console.log("API response:", exercises);
-    console.log("Selected Equipment:", selectedEquipment);
-
     // Filter exercises based on selected equipment
     const filteredExercises = exercises.filter((exercise) => {
-      console.log("Checking exercise:", exercise);
       return selectedEquipment.includes(exercise.equipment);
     });
-
-    // Log the filtered exercises to check if the filtering is working as expected
-    console.log("Filtered Exercises:", filteredExercises);
 
     // Get reference to the container element where cards will be populated
     const cardContainer = document.getElementById("container");
@@ -71,7 +59,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Check if there are no filtered exercises
     if (filteredExercises.length === 0) {
-      // Display a message in the container
       cardContainer.innerHTML =
         "<p class='different'>Please Choose Different Equipment</p>";
     } else {

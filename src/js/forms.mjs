@@ -16,7 +16,7 @@ export function populateExerciseCards(containerElement, exercises) {
     // Create an image element for the gifUrl
     const imgElement = document.createElement("img");
     imgElement.src = exercise.gifUrl;
-    imgElement.alt = exercise.name; // Use exercise name as alt text
+    imgElement.alt = exercise.name; 
     card.appendChild(imgElement);
 
     // Create a paragraph element for the exercise name
@@ -37,7 +37,7 @@ export function populateExerciseCards(containerElement, exercises) {
 // Function to populate the chosenCard section
 function populateChosenCard(exercise) {
   const chosenCardSection = document.getElementById("chosenCard");
-  chosenCardSection.innerHTML = ""; // Clear previous content
+  chosenCardSection.innerHTML = ""; 
 
   // Create a container for the chosen card content
   const cardContentContainer = document.createElement("div");
@@ -47,7 +47,7 @@ function populateChosenCard(exercise) {
   // Create an image element for the gifUrl
   const imgElement = document.createElement("img");
   imgElement.src = exercise.gifUrl;
-  imgElement.alt = exercise.name; // Use exercise name as alt text
+  imgElement.alt = exercise.name; 
   cardContentContainer.appendChild(imgElement);
 
   // Create a container for exercise details (name, instructions, and button)
@@ -72,7 +72,7 @@ function populateChosenCard(exercise) {
   // Add Completed button
   const completedButton = document.createElement("button");
   completedButton.textContent = "Exercise Complete";
-  completedButton.className = "completed-button"; // Add a class for styling
+  completedButton.className = "completed-button"; 
   completedButton.addEventListener("click", () => {
     // Handle completion and update table
     handleExerciseCompletion(exercise);
@@ -89,8 +89,7 @@ function handleExerciseCompletion(exercise) {
   // Add the completed exercise
   completedExercises.push({
     name: exercise.name,
-    equipment: exercise.equipment || "N/A", // Assuming equipment is an array; change as needed
-    date: new Date().toLocaleDateString(),
+    equipment: exercise.equipment || "N/A", 
   });
 
   // Save the updated completed exercises to localStorage
@@ -106,16 +105,16 @@ export function updateCompletedExercisesTable(completedExercises) {
 
   // Check if there are completed exercises
   if (completedExercises.length === 0) {
-    table.style.display = "none"; // Hide the table if no completed exercises
-    tableContainer.style.display = "none"; // Hide the container if no completed exercises
+    table.style.display = "none"; 
+    tableContainer.style.display = "none"; 
     return;
   } else {
-    table.style.display = "table"; // Show the table if there are completed exercises
-    tableContainer.style.display = "block"; // Show the container if there are completed exercises
+    table.style.display = "table"; 
+    tableContainer.style.display = "block"; 
   }
 
   const tableBody = table.querySelector("tbody");
-  tableBody.innerHTML = ""; // Clear previous content
+  tableBody.innerHTML = ""; 
 
   completedExercises.forEach((exercise) => {
     const row = tableBody.insertRow();
@@ -125,18 +124,13 @@ export function updateCompletedExercisesTable(completedExercises) {
   });
 }
 
-
-
-
-// Add a class to the containerElement for styling
-const containerElement = document.getElementById("container"); // Replace with the actual ID of your container
+const containerElement = document.getElementById("container"); 
 containerElement.classList.add("container");
 
 
 export function populateDropdown(selectElement, options) {
   selectElement.innerHTML = "";
 
-  // Ensure options is an array
   const optionsArray = Array.isArray(options) ? options : [options];
 
   const defaultOption = document.createElement("option");

@@ -21,7 +21,6 @@ export const api = {
 
   async fetchExercises(bodyPart, limit = Infinity, apiKey) {
     try {
-        // Make sure to encode bodyPart in the URL
         const encodedBodyPart = encodeURIComponent(bodyPart);
     
         const url = `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${encodedBodyPart}?limit=${limit}`;
@@ -33,23 +32,16 @@ export const api = {
     
         const data = await response.json();
     
-        // console.log('API response:', data);
-    
         // Ensure that the data is an array
-        const exercises = Array.isArray(data) ? data : (data.exercises ? data.exercises : [data]);
-    
-        // console.log('Exercises:', exercises);
+        const exercises = Array.isArray(data) ? data : (data.exercises ? data.exercises : [data]);    
     
         // Check if exercises is not an array or is empty
         if (!Array.isArray(exercises) || exercises.length === 0) {
           throw new Error('Invalid or empty exercises data');
-        }
-    
+        }    
         // Build an array of unique equipment types
         const uniqueEquipmentTypes = Array.from(new Set(exercises.flatMap(exercise => exercise.equipment || []))).map(equipment => ({ value: equipment }));
-        
-        console.log('Unique Equipment Types in api.mjs:', uniqueEquipmentTypes);
-    
+            
         return { exercises, uniqueEquipmentTypes };
       } catch (error) {
         console.error('Error fetching exercises:', error);
